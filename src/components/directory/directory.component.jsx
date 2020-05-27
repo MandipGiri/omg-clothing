@@ -6,8 +6,8 @@ import { sections } from "../../utilites/constants/MenuItemConstants";
 const Directory = () => {
   return (
     <div className="directory-menu">
-      {sections.map(({ id, title, imageUrl, size }) => (
-        <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+      {sections.map(({ id, ...sectionProp }) => (
+        <MenuItem key={id} {...sectionProp} />
       ))}
     </div>
   );
