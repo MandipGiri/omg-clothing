@@ -5,7 +5,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInSignUp from "./pages/signin-signup/signin-signup.component";
-import { auth } from "./firebase/firebase.util";
+import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 
 function App() {
   const [state, setState] = useState({
@@ -13,9 +13,23 @@ function App() {
   });
 
   useEffect(() => {
-    const firebaseAuthState = auth.onAuthStateChanged((user) =>
-      setState({ ...state, currentUser: user })
-    );
+    const firebaseAuthState = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          setState({
+            ...state,
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        });
+      }
+
+      setState({ ...state, currentUser: userAuth });
+    });
 
     return () => firebaseAuthState();
   }, []);

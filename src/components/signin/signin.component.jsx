@@ -29,8 +29,8 @@ function SignIn() {
           name="email"
           type="email"
           label="Email"
-          value={state.email}
           required
+          value={state.email}
           handleChange={handleChange}
         />
 
@@ -38,9 +38,9 @@ function SignIn() {
           name="password"
           type="password"
           label="Password"
+          required
           value={state.password}
           handleChange={handleChange}
-          required
         />
         <div className="button">
           <CustomButton type="submit">Sign In</CustomButton>
