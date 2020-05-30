@@ -4,9 +4,16 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
 import { auth } from "../../firebase/firebase.util";
 import { useSelector } from "react-redux";
+import CartIcon from "../cart-icon/cart-icon.component";
+import Cart from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const reduxState = useSelector((state) => state);
+  const {
+    user: { currentUser },
+    cart: { hidden },
+  } = reduxState;
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -28,7 +35,9 @@ const Header = () => {
             SIGN OUT
           </div>
         )}
+        <CartIcon />
       </div>
+      {!hidden ? <Cart /> : null}
     </div>
   );
 };
