@@ -4,10 +4,16 @@ import "./cart-dropdown.styles.scss";
 import { useSelector } from "react-redux";
 import CartItem from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../redux/cart/cart.selector";
+import { createStructuredSelector } from "reselect";
 
 const Cart = () => {
   //state
-  const cartItems = useSelector(selectCartItems);
+  // const cartItems = useSelector(selectCartItems); --> single state
+  const { cartItems } = useSelector(
+    createStructuredSelector({
+      cartItems: selectCartItems,
+    })
+  );
 
   //UI
   return (

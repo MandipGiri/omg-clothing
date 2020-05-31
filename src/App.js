@@ -8,13 +8,12 @@ import SignInSignUp from "./pages/signin-signup/signin-signup.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.action";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 
 const App = () => {
+  //actions
   const dispatch = useDispatch();
-  const reduxState = useSelector((state) => state);
-  const {
-    user: { currentUser },
-  } = reduxState;
 
   useEffect(() => {
     const firebaseAuthState = auth.onAuthStateChanged(async (userAuth) => {
@@ -36,6 +35,14 @@ const App = () => {
     return () => firebaseAuthState();
   }, [dispatch]);
 
+  //state
+  const { currentUser } = useSelector(
+    createStructuredSelector({
+      currentUser: selectCurrentUser,
+    })
+  );
+
+  //UI
   return (
     <div>
       <Header />
