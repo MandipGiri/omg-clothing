@@ -11,7 +11,10 @@ import { setCurrentUser } from "./redux/user/user.action";
 
 const App = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const reduxState = useSelector((state) => state);
+  const {
+    user: { currentUser },
+  } = reduxState;
 
   useEffect(() => {
     const firebaseAuthState = auth.onAuthStateChanged(async (userAuth) => {
@@ -35,7 +38,6 @@ const App = () => {
 
   return (
     <div>
-      {console.log("currentUser", currentUser)}
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

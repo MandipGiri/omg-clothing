@@ -13,7 +13,6 @@ const CustomButton = ({
     } custom-button`}
     {...otherProps}
   >
-    {console.log("inverted", inverted)}
     {children}
   </button>
 );
