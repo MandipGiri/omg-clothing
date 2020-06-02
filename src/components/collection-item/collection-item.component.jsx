@@ -5,9 +5,12 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
 
 const CollectionItem = ({ item }) => {
+  //actions
   const dispatch = useDispatch();
-  const { name, price, imageUrl } = item;
   const add = (item) => () => dispatch(addItem(item));
+
+  //const state
+  const { name, price, imageUrl } = item;
   
   return (
     <div className="collection-item">
