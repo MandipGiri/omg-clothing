@@ -1,5 +1,5 @@
-export const Collections = [
-  {
+export const Collections = {
+  hats: {
     id: 1,
     title: "Hats",
     routeName: "hats",
@@ -60,7 +60,7 @@ export const Collections = [
       },
     ],
   },
-  {
+  sneakers: {
     id: 2,
     title: "Sneakers",
     routeName: "sneakers",
@@ -115,7 +115,7 @@ export const Collections = [
       },
     ],
   },
-  {
+  jackets: {
     id: 3,
     title: "Jackets",
     routeName: "jackets",
@@ -152,7 +152,7 @@ export const Collections = [
       },
     ],
   },
-  {
+  womens: {
     id: 4,
     title: "Womens",
     routeName: "womens",
@@ -201,7 +201,7 @@ export const Collections = [
       },
     ],
   },
-  {
+  mens: {
     id: 5,
     title: "Mens",
     routeName: "mens",
@@ -244,4 +244,4 @@ export const Collections = [
       },
     ],
   },
-];
+};

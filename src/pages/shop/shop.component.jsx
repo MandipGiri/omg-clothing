@@ -1,12 +1,13 @@
 import React from "react";
-import { Collections } from "../../utilites/constants/CollectionItemsConstant";
-import CollectionPreview from "../../components/preview-collection/collection-preview.component";
-const ShopPage = () => {
+import CollectionOverview from "../../components/collection-overview/collection-overview.component";
+import { Route } from "react-router-dom";
+import Collection from "../collection/collection.component";
+
+const ShopPage = ({ match }) => {
   return (
     <div className="shop-page">
-      {Collections.map(({ id, ...collectionProp }) => (
-        <CollectionPreview key={id} {...collectionProp} />
-      ))}
+      <Route exact path={`${match.path}`} component={CollectionOverview} />
+      <Route path={`${match.path}/:collectionId`} component={Collection} />
     </div>
   );
 };
