@@ -13,6 +13,13 @@ import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 
 const App = () => {
+  //state
+  const { currentUser } = useSelector(
+    createStructuredSelector({
+      currentUser: selectCurrentUser,
+    })
+  );
+
   //actions
   const dispatch = useDispatch();
 
@@ -35,13 +42,6 @@ const App = () => {
 
     return () => firebaseAuthState();
   }, [dispatch]);
-
-  //state
-  const { currentUser } = useSelector(
-    createStructuredSelector({
-      currentUser: selectCurrentUser,
-    })
-  );
 
   //UI
   return (
