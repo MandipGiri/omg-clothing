@@ -1,8 +1,9 @@
 import { ShopActionTypes } from "./shop.types";
 
 const initialState = {
-  collections: null,
   processing: true,
+  collections: null,
+  errorMessage: "",
 };
 
 const shopReducer = (state = initialState, action) => {
@@ -11,6 +12,7 @@ const shopReducer = (state = initialState, action) => {
       return {
         ...state,
         processing: true,
+        collections: null,
         errorMessage: "",
       };
 
