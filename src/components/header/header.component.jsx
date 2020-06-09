@@ -1,8 +1,7 @@
 import React from "react";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
-import { auth } from "../../firebase/firebase.util";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import Cart from "../cart-dropdown/cart-dropdown.component";
 import { selectCurrentUser } from "../../redux/user/user.selector";
@@ -14,8 +13,13 @@ import {
   OptionsContainer,
   OptionLink,
 } from "./header.styles";
+import { signOutStart } from "../../redux/user/user.action";
 
 const Header = () => {
+  //action
+  const dispatch = useDispatch();
+  const signOut = () => dispatch(signOutStart());
+
   //state
   const { currentUser, hidden } = useSelector(
     createStructuredSelector({
@@ -31,18 +35,12 @@ const Header = () => {
         <Logo className="logo" />
       </LogoContainer>
       <OptionsContainer>
-        <OptionLink to="/shop">
-          SHOP
-        </OptionLink>
-        <OptionLink to="/shop">
-          CONTACT
-        </OptionLink>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink to="/shop">CONTACT</OptionLink>
         {!currentUser ? (
-          <OptionLink to="/signin">
-            SIGN IN
-          </OptionLink>
+          <OptionLink to="/signin">SIGN IN</OptionLink>
         ) : (
-          <OptionLink as='div' onClick={() => auth.signOut()}>
+          <OptionLink as="div" onClick={signOut}>
             SIGN OUT
           </OptionLink>
         )}

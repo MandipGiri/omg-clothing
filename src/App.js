@@ -6,42 +6,24 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInSignUp from "./pages/signin-signup/signin-signup.component";
 import Checkout from "./pages/checkout/checkout.component";
-import { auth, createUserProfileDocument } from "./firebase/firebase.util";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "./redux/user/user.action";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
+import { checkUserSession } from "./redux/user/user.action";
 
 const App = () => {
+  //actions
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(checkUserSession());
+  }, [dispatch]);
+
   //state
   const { currentUser } = useSelector(
     createStructuredSelector({
       currentUser: selectCurrentUser,
     })
   );
-
-  //actions
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const firebaseAuthState = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapShot) => {
-          dispatch(
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            })
-          );
-        });
-      }
-      dispatch(setCurrentUser(userAuth));
-    });
-
-    return () => firebaseAuthState();
-  }, [dispatch]);
 
   //UI
   return (
