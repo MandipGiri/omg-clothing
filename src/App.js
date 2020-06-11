@@ -14,6 +14,7 @@ import { checkUserSession } from "./redux/user/user.action";
 const App = () => {
   //actions
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(checkUserSession());
   }, [dispatch]);

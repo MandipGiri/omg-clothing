@@ -13,7 +13,7 @@ import {
 const CollectionItem = ({ item }) => {
   //actions
   const dispatch = useDispatch();
-  const add = (item) => () => dispatch(addItem(item));
+  const add = () => dispatch(addItem(item));
 
   //const state
   const { name, price, imageUrl } = item;
