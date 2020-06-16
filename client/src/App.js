@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
@@ -10,11 +9,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 import { checkUserSession } from "./redux/user/user.action";
+import { GlobalStyles } from "./global.styles";
+
+import CurrentUserContext from "./context/current-user/current-user.context";
 
 const App = () => {
   //actions
   const dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(checkUserSession());
   }, [dispatch]);
@@ -29,6 +30,7 @@ const App = () => {
   //UI
   return (
     <div>
+      <GlobalStyles/>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

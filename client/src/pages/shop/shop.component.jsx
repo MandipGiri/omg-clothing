@@ -19,7 +19,7 @@ const ShopPage = ({ match }) => {
 
   //UI
   return (
-    <div className="shop-page">
+    <div>
       <Route
         exact
         path={`${match.path}`}

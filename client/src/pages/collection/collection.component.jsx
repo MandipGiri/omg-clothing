@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   CollectionPageContainer,
   CollectionTitle,
@@ -8,9 +8,14 @@ import CollectionItem from "../../components/collection-item/collection-item.com
 import { useSelector } from "react-redux";
 import { selectCollection } from "../../redux/shop/shop.selector";
 import { createStructuredSelector } from "reselect";
+import CollectionContext from "../../context/collections/collections.context";
 
 const Collection = ({ match }) => {
   //state
+  //context api
+  // const collections = useContext(CollectionContext);
+  // const { title, items } = collections[match.params.collectionId];
+  //from selector
   const {
     collection: { title, items },
   } = useSelector(
