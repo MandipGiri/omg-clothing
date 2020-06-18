@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./checkout-item.styles.scss";
 import { useDispatch } from "react-redux";
 import {
@@ -11,9 +11,18 @@ const CheckoutItem = ({ cartItem }) => {
   //action
   const dispatch = useDispatch();
 
-  const deleteItem = () => dispatch(clearItemFromCart(cartItem));
-  const increaseItemQuantity = () => dispatch(addItem(cartItem));
-  const decreaseItemQuantity = () => dispatch(removeItem(cartItem));
+  const deleteItem = useCallback(() => dispatch(clearItemFromCart(cartItem)), [
+    cartItem,
+    dispatch,
+  ]);
+  const increaseItemQuantity = useCallback(() => dispatch(addItem(cartItem)), [
+    cartItem,
+    dispatch,
+  ]);
+  const decreaseItemQuantity = useCallback(
+    () => dispatch(removeItem(cartItem)),
+    [cartItem, dispatch]
+  );
 
   //state
   const { name, imageUrl, price, quantity } = cartItem;
@@ -42,4 +51,4 @@ const CheckoutItem = ({ cartItem }) => {
   );
 };
 
-export default CheckoutItem;
+export default React.memo(CheckoutItem);
